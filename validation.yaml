@@ -1,0 +1,16 @@
+name: validation_component
+version: 1
+type: command
+environment:
+image: mcr.microsoft.com/azureml/minimal-ubuntu18.04-py37-cpu-inference:latest
+inputs:
+model:
+type: uri_file
+test_data:
+type: uri_file
+outputs:
+report:
+type: uri_file
+command: >
+python validate.py --model ${{inputs.model}} --test_data ${{inputs.test_data}} --report_out ${{outputs.report}}
+code: ./components/validation

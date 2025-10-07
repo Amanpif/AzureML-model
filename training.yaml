@@ -1,0 +1,20 @@
+name: train_component
+version: 1
+type: command
+environment:
+image: mcr.microsoft.com/azureml/minimal-ubuntu18.04-py37-cpu-inference:latest
+inputs:
+train_data:
+type: uri_file
+params:
+n_estimators:
+type: integer
+default: 100
+outputs:
+model:
+type: uri_file
+metrics:
+type: uri_file
+command: >
+python train.py --input ${{inputs.train_data}} --model_out ${{outputs.model}} --metrics_out ${{outputs.metrics}} --n_estimators ${{inputs.n_estimators}}
+code: ./components/training

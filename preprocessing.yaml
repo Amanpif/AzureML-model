@@ -1,0 +1,14 @@
+name: preprocess_component
+version: 1
+type: command
+environment:
+image: mcr.microsoft.com/azureml/minimal-ubuntu18.04-py37-cpu-inference:latest
+inputs:
+input_data:
+type: uri_file
+outputs:
+output_data:
+type: uri_file
+command: >
+python preprocess.py --input ${{inputs.input_data}} --output ${{outputs.output_data}}
+code: ./components/preprocessing
